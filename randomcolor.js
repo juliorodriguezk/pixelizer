@@ -1,22 +1,57 @@
 var TEST_MODULES = TEST_MODULES || {};
 TEST_MODULES.RandomGenerator =
     function(canvasId) {
-        this.id = canvasId;
-        this.canvas = document.getElementById(canvasId);
-        if (this.id && this.canvas) {
-            this.context = this.canvas.getContext("2d");
-            this.width = this.canvas.width;
-            this.height = this.canvas.height;
-            this.pixelWidth;
-            this.pixelHeight;
-            this.pixelOpacity;
-        } else {
-            console.error("Canvas can not be found, did you provide correct ID?");
-        }
+        setCanvas.call(this, canvasId);
     };
 
 TEST_MODULES.RandomGenerator.prototype = (function() {
-    var generateImageColor, createPixel, fillCanvas;
+    var _CONTAINER = document.getElementById("pixels-container"),
+        _DEFAULT_CANVAS_NAME = "test-canvas",
+        generateImageColor,
+        createPixel,
+        fillCanvas,
+        setCanvasSize,
+        setPixelSize;
+
+    setCanvas = function(canvasId) {
+        var myCanvas = document.getElementById(canvasId)||document.createElement("CANVAS");
+        this.id = canvasId || _DEFAULT_CANVAS_NAME;
+        myCanvas.id = this.id;
+        this.canvas = myCanvas;
+        if (!document.getElementById(this.id)){
+            _CONTAINER.appendChild(this.canvas);
+        }
+        this.context = this.canvas.getContext("2d");
+        this.width = 0;
+        this.height = 0;
+        this.pixelWidth = 0;
+        this.pixelHeight = 0;
+        this.pixelOpacity = false;
+
+    };
+
+    setCanvasSize = function(height, width) {
+        if (this.canvas) {
+            if (height > 0) {
+                this.canvas.height = parseInt(height, 10);
+                this.height = parseInt(height, 10);
+            }
+            if (width > 0) {
+                this.canvas.width = parseInt(width, 10);
+                this.width = parseInt(width, 10);
+            }
+        }
+    };
+
+    setPixelSize = function(height, width, opacity) {
+        if (height > 0) {
+            this.pixelHeight = parseInt(height, 10);
+        }
+        if (width > 0) {
+            this.pixelWidth = parseInt(width, 10);
+        }
+        this.pixelOpacity = opacity;
+    };
 
     generateImageColor = function(opacity) {
         var items = opacity ? 4 : 3,
@@ -41,7 +76,8 @@ TEST_MODULES.RandomGenerator.prototype = (function() {
             image.data[i + 2] = colors[2];
             if (opacity) {
                 image.data[i + 3] = colors[3];
-            } else {
+            }
+            else {
                 image.data[i + 3] = 255;
             }
         }
@@ -53,9 +89,9 @@ TEST_MODULES.RandomGenerator.prototype = (function() {
         var currentX = 0,
             currentY = 0;
 
-        this.pixelWidth = width || 1;
-        this.pixelHeight = height || 1;
-        this.pixelOpacity = opacity || false;
+        this.pixelWidth = width || this.pixelWidth;
+        this.pixelHeight = height || this.pixelHeight;
+        this.pixelOpacity = opacity || this.pixelOpacity;
         while (currentY < this.height) {
             currentX = 0;
             while (currentX < this.width) {
@@ -64,10 +100,18 @@ TEST_MODULES.RandomGenerator.prototype = (function() {
             }
             currentY += this.pixelHeight;
         }
+
+    };
+    clearCanvas = function() {
+        while (_CONTAINER.firstChild) {
+            _CONTAINER.removeChild(_CONTAINER.firstChild)
+        }
     };
     return {
         constructor: TEST_MODULES.RandomGenerator,
-        pixelize: fillCanvas
-
+        setCanvasSize: setCanvasSize,
+        setPixelSize: setPixelSize,
+        pixelize: fillCanvas,
+        clearCanvas: clearCanvas
     };
 })();

@@ -3,11 +3,41 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="pixelizer.css">
     <title>SVG PIXEL DEMO</title>
 </head>
 
 <body>
-    <canvas id="test-canvas" width="1000" height="100" style="border:1px solid #d3d3d3;"></canvas>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-4">
+            <form action="#">
+                <div class="form-group">
+                    <legend>Canvas</legend>
+                    <label>Nombre: </label>
+                    <input type="text" name="nombre_canvas" value="test-canvas" class="form-control" />
+                    <label>Alto:</label>
+                    <input type="number" name="ancho_canvas" min="0" step="1" value="0" class="form-control" />
+                    <label>Ancho:</label>
+                    <input type="number" name="alto_canvas" min="0" step="1" value="0" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <legend>Tamaño pixels</legend>
+                    <label>Alto:</label>
+                    <input type="number" name="ancho_pixel" min="0" step="1" value="0" class="form-control" />
+                    <label>Ancho:</label>
+                    <input type="number" name="alto_pixel" min="0" step="1" value="0" class="form-control" />
+                    <label>Usar opacidad:</label>
+                    <input type="checkbox" name="opacidad_pixel" />
+                </div>
+                <input type="button" name="submit" value="Generar Pixels" class="btn btn-default" onclick="javascript:createCanvas(this.form);" />
+                <input type="button" name="submit" value="Eliminar Pixels" class="btn btn-default" onclick="javascript:resetCanvas();" />
+            </form>
+        </div>
+        <div id="pixels-container" class="col-md-6"></div>
+        <div class="col-md-1"></div>
+    </div>
 </body>
 <script src="randomcolor.js"></script>
 <script src="test.js"></script>
