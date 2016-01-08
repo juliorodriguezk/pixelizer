@@ -1,0 +1,12 @@
+.principal-container{
+  margin-top: 1px;
+}
+.pixels-container {
+  max-height: 700px;
+  border-left: 1px solid #ababab;
+  overflow: scroll;
+}
+
+.pixels-container canvas{
+  float: left;
+}

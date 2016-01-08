@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="pixelizer.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/pixelizer.css">
     <title>SVG PIXEL DEMO</title>
 </head>
 
 <body>
+    <div class="principal-container container">
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <form action="#">
                 <div class="form-group">
-                    <legend>Canvas</legend>
+                    <legend>Contenedor pixels</legend>
                     <label>Nombre: </label>
                     <input type="text" name="nombre_canvas" value="test-canvas" class="form-control" />
                     <label>Alto:</label>
@@ -35,11 +34,11 @@
                 <input type="button" name="submit" value="Eliminar Pixels" class="btn btn-default" onclick="javascript:resetCanvas();" />
             </form>
         </div>
-        <div id="pixels-container" class="col-md-6"></div>
-        <div class="col-md-1"></div>
+        <div id="pixels-container" class="pixels-container col-md-9"></div>
     </div>
+</div>
 </body>
-<script src="randomcolor.js"></script>
-<script src="test.js"></script>
+<script src="js/randomcolor.js"></script>
+<script src="js/test.js"></script>
 
 </html>

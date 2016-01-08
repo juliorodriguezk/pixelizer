@@ -33,22 +33,22 @@ TEST_MODULES.RandomGenerator.prototype = (function() {
     setCanvasSize = function(height, width) {
         if (this.canvas) {
             if (height > 0) {
-                this.canvas.height = parseInt(height, 10);
-                this.height = parseInt(height, 10);
+                this.canvas.height = parseFloat(height, 10);
+                this.height = parseFloat(height, 10);
             }
             if (width > 0) {
-                this.canvas.width = parseInt(width, 10);
-                this.width = parseInt(width, 10);
+                this.canvas.width = parseFloat(width, 10);
+                this.width = parseFloat(width, 10);
             }
         }
     };
 
     setPixelSize = function(height, width, opacity) {
         if (height > 0) {
-            this.pixelHeight = parseInt(height, 10);
+            this.pixelHeight = parseFloat(height, 10);
         }
         if (width > 0) {
-            this.pixelWidth = parseInt(width, 10);
+            this.pixelWidth = parseFloat(width, 10);
         }
         this.pixelOpacity = opacity;
     };
